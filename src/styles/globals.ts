@@ -1,3 +1,7 @@
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +20,7 @@
   }
 }
 body, input, textarea, select, button {
-  font: 400 1rem ; // set a font
+  font: 400  1rem  'Inter', sans-serif; 
 }
 button {
   cursor: pointer;
@@ -26,3 +30,5 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+`;
