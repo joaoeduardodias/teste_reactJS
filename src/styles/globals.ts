@@ -36,6 +36,7 @@ body, input, textarea, select, button {
 }
 body {
   -webkit-font-smoothing: antialiased;
+  background: var(--background);
 }
 button {
   cursor: pointer;
