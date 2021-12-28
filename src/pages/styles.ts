@@ -1,9 +1,19 @@
 import styled from 'styled-components';
 
-export const Container = styled.ul`
+export const Container = styled.main`
+  max-width: 1140px;
+  margin: 0 auto;
+
+  > button {
+    margin: 0 auto;
+  }
+`;
+
+export const Content = styled.ul`
   max-width: 71.25rem;
-  margin: 5.5rem auto 0;
+  margin: 5.5rem auto 3.6rem;
   list-style: none;
+
   li {
     width: 100%;
     height: 7.125rem;
@@ -33,6 +43,9 @@ export const Container = styled.ul`
         font-size: 0.8rem;
         margin-top: 1rem;
       }
+    }
+    & + li {
+      margin-top: 2rem;
     }
   }
 `;
