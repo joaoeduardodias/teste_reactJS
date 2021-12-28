@@ -13,6 +13,15 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  > a {
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.8rem;
+      color: var(--brandcolor-primary-default);
+      margin-right: 1.125rem;
+    }
+  }
   h1 {
     font: 700 1.5rem 'Montserrat';
     color: var(--brandcolor-primary-default);
@@ -24,13 +33,15 @@ export const Content = styled.div`
     color: var(--bg-white);
     border-radius: 71px;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      font-size: 1.5rem;
-      margin-left: 0.4rem;
-      color: var(--bg-white);
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        font-size: 1.5rem;
+        margin-left: 0.4rem;
+        color: var(--bg-white);
+      }
     }
   }
 `;
