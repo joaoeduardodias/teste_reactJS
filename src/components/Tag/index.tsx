@@ -5,5 +5,5 @@ interface TagProps {
 }
 
 export function Tag({ text }: TagProps): JSX.Element {
-  return <Container type="button">{text}</Container>;
+  return <Container>{text}</Container>;
 }

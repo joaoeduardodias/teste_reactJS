@@ -53,7 +53,7 @@ export const Content = styled.ul`
 export const ContainerTags = styled.div`
   display: flex;
   align-items: center;
-  button + button {
+  div + div {
     margin-left: 1rem;
   }
 `;
