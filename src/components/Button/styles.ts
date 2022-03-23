@@ -9,6 +9,7 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 
   svg {
     margin-left: 0.4rem;

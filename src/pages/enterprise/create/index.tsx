@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { Button } from '../../../components/Button';
 import { Header } from '../../../components/Header';
 import { Input } from '../../../components/Input';
 import { Select } from '../../../components/Select';
@@ -28,7 +29,7 @@ const createEnterprise: NextPage = function () {
             <span>Santo André </span> <span>SP</span>
           </Address>
           <Input type="number" name="number" placeholder="Número" />
-          <button type="submit">Cadastrar</button>
+          <Button type="submit" name="Cadastrar" />
         </Content>
       </Container>
     </>
