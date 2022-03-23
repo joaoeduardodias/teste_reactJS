@@ -21,15 +21,7 @@ export const Content = styled.form`
     font-size: 1.125rem;
     margin-bottom: 2rem;
   }
-  select {
-    border: 0;
-    border-bottom: 2px solid var(--outline-gray-dark);
-    background: none;
-    outline: none;
-    padding: 1rem 0;
-    margin-bottom: 1.125rem;
-    color: var(--textcolor-primary);
-  }
+
   input {
     border: 0;
     border-bottom: 2px solid var(--outline-gray-dark);

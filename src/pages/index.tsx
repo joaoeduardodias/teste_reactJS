@@ -24,7 +24,7 @@ const Home: NextPage = function () {
             <div className="section-text">
               <div>
                 <strong>Villega Vila Velha</strong>
-                <Link href="/enterprise/edit?1" passHref>
+                <Link href="/enterprise/edit?id=1" passHref>
                   <MdOutlineMode />
                 </Link>
                 <MdDeleteOutline onClick={() => handleDeleteEnterprise('1a')} />

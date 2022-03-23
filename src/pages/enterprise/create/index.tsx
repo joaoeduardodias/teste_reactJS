@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { Header } from '../../../components/Header';
+import { Select } from '../../../components/Select';
 import { Address, Container, Content } from './styles';
 
 const createEnterprise: NextPage = function () {
@@ -9,22 +10,22 @@ const createEnterprise: NextPage = function () {
       <Container>
         <Content>
           <h2>Informações</h2>
-          <select name="releases" id="releases">
+          <Select name="releases">
             <option value="short_release">Breve Lançamento</option>
             <option value="launch">Lançamento</option>
             <option value="in_Works">Em obras</option>
             <option value="ready_to_live">Pronto para morar</option>
-          </select>
+          </Select>
           <input
             type="text"
             name="name"
             id="name"
             placeholder="Nome do Empreendimento"
           />
-          <select name="residential" id="residential">
+          <Select name="residential">
             <option value="residential">Residencial</option>
             <option value="commercial">Comercial</option>
-          </select>
+          </Select>
           <input type="text" name="zip_code" id="zip_code" placeholder="Cep" />
           <Address>
             <span>Rua Doutor Messuti,</span> <span>Vila Bastos</span>

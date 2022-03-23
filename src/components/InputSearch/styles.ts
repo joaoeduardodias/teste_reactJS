@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border-bottom: 2px solid var(---border-divider);
+  border-bottom: 2px solid var(--outline-gray-dark);
   width: 71.25rem;
   height: 3.25rem;
   margin: 0 auto;
