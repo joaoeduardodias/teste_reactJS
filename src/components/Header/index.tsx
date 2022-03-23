@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { MdAdd, MdChevronLeft } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
+import { Button } from '../Button';
+import { ButtonHomeLink } from '../ButtonHomeLink';
 import { Container, Content } from './styles';
 
 interface HeaderProps {
@@ -14,23 +16,17 @@ export function Header({ title }: HeaderProps): JSX.Element {
     <Container>
       <Content>
         {router.pathname !== '/' ? (
-          <Link href="/">
-            <a>
-              <MdChevronLeft /> <h1>{title}</h1>
-            </a>
-          </Link>
+          <ButtonHomeLink title={title} />
         ) : (
           <h1>{title}</h1>
         )}
 
         {router.pathname === '/' && (
-          <button type="button">
-            <Link href="/enterprise/create" prefetch>
-              <a>
-                Adicionar <MdAdd />
-              </a>
-            </Link>
-          </button>
+          <Link href="/enterprise/create" prefetch passHref>
+            <a>
+              <Button type="button" name="Adicionar" icon={MdAdd} />
+            </a>
+          </Link>
         )}
       </Content>
     </Container>

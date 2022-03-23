@@ -1,12 +1,19 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { MdDeleteOutline, MdOutlineMode } from 'react-icons/md';
-import { ButtonPagination } from '../components/ButtonPagination';
+import { Button } from '../components/Button';
 import { Header } from '../components/Header';
 import { InputSearch } from '../components/InputSearch';
 import { Tag } from '../components/Tag';
-import { Container, Content, ContainerTags } from './styles';
+import { Container, ContainerTags, Content } from './styles';
 
 const Home: NextPage = function () {
+  async function handleDeleteEnterprise(id: string): Promise<void> {
+    // eslint-disable-next-line no-promise-executor-return
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(id);
+  }
+
   return (
     <>
       <Header title="Empreendimentos" />
@@ -16,22 +23,11 @@ const Home: NextPage = function () {
           <li>
             <div className="section-text">
               <div>
-                <strong>Villega Vila Velha</strong> <MdOutlineMode />
-                <MdDeleteOutline />
-              </div>
-              <span>Rua Dório Silva, 100 - Vila Guaranhuns, Vila Velha</span>
-            </div>
-            <ContainerTags>
-              <Tag text="Lançamento" />
-              <Tag text="Residencial" />
-            </ContainerTags>
-          </li>
-
-          <li>
-            <div className="section-text">
-              <div>
-                <strong>Villega Vila Velha</strong> <MdOutlineMode />
-                <MdDeleteOutline />
+                <strong>Villega Vila Velha</strong>
+                <Link href="/enterprise/edit?1" passHref>
+                  <MdOutlineMode />
+                </Link>
+                <MdDeleteOutline onClick={() => handleDeleteEnterprise('1a')} />
               </div>
               <span>Rua Dório Silva, 100 - Vila Guaranhuns, Vila Velha</span>
             </div>
@@ -41,7 +37,7 @@ const Home: NextPage = function () {
             </ContainerTags>
           </li>
         </Content>
-        <ButtonPagination />
+        <Button name="Carregar mais" />
       </Container>
     </>
   );
