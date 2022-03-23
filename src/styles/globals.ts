@@ -9,7 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     --border-tag: ##8E85FF;
     --textcolor-primary: #302E45;
     --textcolor-secondary: #6D6C7B;
-    ---border-divider: #BBB8D9
+    --outline-gray-dark: #BBB8D9;
+    
   }
 
 

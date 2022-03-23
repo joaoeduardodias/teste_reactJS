@@ -25,7 +25,7 @@ export function Header({ title }: HeaderProps): JSX.Element {
 
         {router.pathname === '/' && (
           <button type="button">
-            <Link href="/addEnterprise" prefetch>
+            <Link href="/enterprise/create" prefetch>
               <a>
                 Adicionar <MdAdd />
               </a>
