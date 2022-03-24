@@ -2,31 +2,17 @@ import _debounce from 'lodash.debounce';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation, useQuery } from 'react-query';
 import { Button } from '../../../components/Button';
 import { Header } from '../../../components/Header';
 import { Input, InputCep } from '../../../components/Input';
 import { Select } from '../../../components/Select';
 import { api, apiZipCode } from '../../../services/api';
+import { queryClient } from '../../../services/queryClient';
 import { Toast } from '../../_app';
 import { Address, Container, Content } from './styles';
 
-type Enterprise = {
-  id: string;
-  name: string;
-  releases: string;
-  purpose: string;
-  ri_number: string;
-  address: {
-    district: string;
-    city: string;
-    street: string;
-    state: string;
-    number: string;
-    cep: string;
-  };
-};
 enum releasesEnum {
   short_release = 'short_release',
   launch = 'launch',
@@ -51,7 +37,6 @@ type Address = {
   cep?: string;
 };
 const EditEnterprise: NextPage = function () {
-  const [enterprise, setEnterprise] = useState<Enterprise>();
   const [address, setAddress] = useState<Address>();
   const [zip_code, setZip_code] = useState('');
   const {
@@ -61,6 +46,7 @@ const EditEnterprise: NextPage = function () {
     reset,
   } = useForm<FormInputs>();
   const router = useRouter();
+  const { id } = router.query;
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function getEnterprise(id: string) {
@@ -69,7 +55,6 @@ const EditEnterprise: NextPage = function () {
       async () => {
         const { data } = await api.get(`/${id}`);
 
-        setEnterprise(data);
         setAddress({
           cep: data?.address.cep,
           city: data?.address.city,
@@ -80,32 +65,33 @@ const EditEnterprise: NextPage = function () {
         reset({
           name: data.name,
           number: data.address.number,
-          purpose: data.purpose,
-          releases: data.releases,
         });
         setZip_code(String(data?.address.cep));
       },
       {
-        staleTime: 1000 * 60 * 30, // 30 minutes
+        staleTime: 1000 * 10, // 10 minutes
       }
     );
   }
 
-  // Pegar o id pelo query params
-  getEnterprise('PA02');
-  console.log(enterprise);
+  getEnterprise(String(id));
+  queryClient.invalidateQueries('enterprises');
 
-  // const editEnterprise = useMutation(
-  //   async enterprise => {
-  //     const response = await api.post('/', enterprise);
-  //     return response.data;
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries('enterprises');
-  //     },
-  //   }
-  // );
+  const editEnterprise = useMutation(
+    async enterprise => {
+      const response = await api.put(`/${id}`, enterprise);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('enterprises');
+        Toast.fire({
+          icon: 'success',
+          title: 'Empreendimento editado com sucesso!',
+        });
+      },
+    }
+  );
 
   // debounce of search address
 
@@ -149,9 +135,23 @@ const EditEnterprise: NextPage = function () {
     debounceFn(event.target.value);
   }
 
-  async function handleEditEnterprise(): Promise<void> {
-    console.log('ola');
-  }
+  const handleEditEnterprise: SubmitHandler<FormInputs> = async data => {
+    const enterprise = {
+      name: data.name,
+      status: data.releases.toUpperCase(),
+      purpose: data.purpose.toUpperCase(),
+      address: {
+        street: address?.street,
+        number: data.number, // number of house
+        district: address?.district,
+        city: address?.city,
+        state: address?.state,
+        cep: address?.cep,
+      },
+    };
+    await editEnterprise.mutateAsync(enterprise);
+    router.push('/');
+  };
 
   return (
     <>
@@ -171,7 +171,9 @@ const EditEnterprise: NextPage = function () {
             error={errors.name}
           />
           <Select {...register('purpose')} error={errors.purpose}>
-            <option value="home">Residencial</option>
+            <option value="home" selected>
+              Residencial
+            </option>
             <option value="commercial">Comercial</option>
           </Select>
           <InputCep

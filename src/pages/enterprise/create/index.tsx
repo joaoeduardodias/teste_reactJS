@@ -53,6 +53,10 @@ const CreateEnterprise: NextPage = function () {
     {
       onSuccess: () => {
         queryClient.invalidateQueries('enterprises');
+        Toast.fire({
+          icon: 'success',
+          title: 'Empreendimento criado com sucesso!',
+        });
       },
     }
   );

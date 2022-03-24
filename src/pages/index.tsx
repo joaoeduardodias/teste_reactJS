@@ -34,7 +34,7 @@ const Home: NextPage = function () {
   async function handleDeleteEnterprise(enterpriseId: string): Promise<void> {
     // eslint-disable-next-line no-promise-executor-return
     await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log(enterpriseId);
+
     Swal.fire({
       title: 'Apagar empreendimento ?',
       text: 'Deseja apagar esse empreendimento ?',

@@ -16,11 +16,9 @@
       }
     },
     {
-      "id": "PA02",
-      "name": "Moriah Ipiranga",
+      "name": "Moriah Ipiranga 1",
       "status": "RELEASE",
-      "purpose": "HOME",
-      "ri_number": "321123",
+      "purpose": "COMMERCIAL",
       "address": {
         "street": "Rua Lucinda Ferreira",
         "number": "173",
@@ -28,7 +26,8 @@
         "city": "São Paulo",
         "state": "SP",
         "cep": "60000000"
-      }
+      },
+      "id": "PA02"
     },
     {
       "id": "PA03",
