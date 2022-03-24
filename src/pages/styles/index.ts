@@ -11,6 +11,7 @@ export const Container = styled.main`
 
 export const Content = styled.ul`
   max-width: 71.25rem;
+  width: 90%;
   margin: 5.5rem auto 3.6rem;
   list-style: none;
 
@@ -27,6 +28,15 @@ export const Content = styled.ul`
     .section-text {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      > div {
+        display: flex;
+        align-items: center;
+        a {
+          padding: 0;
+          margin: 0;
+        }
+      }
       strong {
         font-size: 1.25rem;
         font-weight: 700;
