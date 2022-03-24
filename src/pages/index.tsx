@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MdDeleteOutline, MdOutlineMode } from 'react-icons/md';
+import { useMutation } from 'react-query';
 import Swal from 'sweetalert2';
 import { Button } from '../components/Button';
 import { Header } from '../components/Header';
@@ -12,10 +13,22 @@ import { api } from '../services/api';
 import { useEnterprises } from '../services/hooks/useEnterprise';
 import { queryClient } from '../services/queryClient';
 import { Container, ContainerTags, Content } from './styles';
+import { Toast } from './_app';
 
 const Home: NextPage = function () {
   const [page, setPage] = useState(1);
   const { data, isLoading, error } = useEnterprises(page);
+  const deleteEnterprise = useMutation(
+    async enterprise => {
+      const response = await api.delete(`/${enterprise}`);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('enterprises');
+      },
+    }
+  );
 
   async function handlePrefetchEnterprise(enterpriseId: string): Promise<any> {
     await queryClient.prefetchQuery(
@@ -32,9 +45,6 @@ const Home: NextPage = function () {
   }
 
   async function handleDeleteEnterprise(enterpriseId: string): Promise<void> {
-    // eslint-disable-next-line no-promise-executor-return
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
     Swal.fire({
       title: 'Apagar empreendimento ?',
       text: 'Deseja apagar esse empreendimento ?',
@@ -46,13 +56,11 @@ const Home: NextPage = function () {
       cancelButtonText: 'Cancelar',
     }).then(result => {
       if (result.isConfirmed) {
-        // após eu clicar em sim, cairemos aqui
-        // Toast.fire(
-        //   {
-        //     icon: 'success',
-        //     title: 'Empreendimento deletado com sucesso!'
-        //   }
-        //  )
+        deleteEnterprise.mutateAsync(enterpriseId);
+        Toast.fire({
+          icon: 'success',
+          title: 'Empreendimento editado com sucesso!',
+        });
       }
     });
   }

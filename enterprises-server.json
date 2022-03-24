@@ -73,21 +73,6 @@
         "cep": "60000000"
       },
       "id": "j1j-_th"
-    },
-    {
-      "name": "aaa",
-      "status": "IN_WORKS",
-      "purpose": "COMMERCIAL",
-      "ri_number": "3",
-      "address": {
-        "street": "",
-        "number": "456",
-        "district": "",
-        "city": "Aparecida do Taboado",
-        "state": "MS",
-        "cep": "79570-000"
-      },
-      "id": "1VmW9er"
     }
   ]
 }
