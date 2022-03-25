@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryResult } from 'react-query';
 import { api } from '../api';
 
 type Enterprise = {
@@ -54,8 +54,9 @@ export async function getEnterprises(
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useEnterprises(page: number) {
+export function useEnterprises(page: number, options: any) {
   return useQuery(['enterprises', page], () => getEnterprises(page), {
     staleTime: 1000 * 60 * 30, // 30 minutes
-  });
+    ...options,
+  }) as UseQueryResult<getEnterprisesResponse, unknown>;
 }

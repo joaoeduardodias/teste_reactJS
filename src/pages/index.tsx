@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MdDeleteOutline, MdOutlineMode } from 'react-icons/md';
@@ -10,14 +10,20 @@ import { Header } from '../components/Header';
 import { InputSearch } from '../components/InputSearch';
 import { Tag } from '../components/Tag';
 import { api } from '../services/api';
-import { useEnterprises } from '../services/hooks/useEnterprise';
+import {
+  getEnterprises,
+  // eslint-disable-next-line prettier/prettier
+  useEnterprises
+} from '../services/hooks/useEnterprise';
 import { queryClient } from '../services/queryClient';
 import { Container, ContainerTags, Content } from '../styles/home';
 import { Toast } from './_app';
 
-const Home: NextPage = function () {
+const Home: NextPage = function ({ enterprises }: any) {
   const [page, setPage] = useState(1);
-  const { data, isLoading, error } = useEnterprises(page);
+  const { data, isLoading, error } = useEnterprises(page, {
+    initialData: enterprises,
+  });
   const deleteEnterprise = useMutation(
     async enterprise => {
       const response = await api.delete(`/${enterprise}`);
@@ -141,3 +147,13 @@ const Home: NextPage = function () {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const enterprises = await getEnterprises(1);
+
+  return {
+    props: {
+      enterprises,
+    },
+  };
+};
