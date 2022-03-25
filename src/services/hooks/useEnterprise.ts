@@ -20,7 +20,7 @@ type Enterprise = {
 interface getEnterprisesResponse {
   enterprises: Enterprise[];
 }
-const limitData = 5;
+const limitData = 100;
 
 export async function getEnterprises(
   page: number

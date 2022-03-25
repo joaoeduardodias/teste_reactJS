@@ -24,6 +24,7 @@ const Home: NextPage = function ({ enterprises }: any) {
   const { data, isLoading, error } = useEnterprises(page, {
     initialData: enterprises,
   });
+
   const deleteEnterprise = useMutation(
     async enterprise => {
       const response = await api.delete(`/${enterprise}`);
@@ -73,7 +74,6 @@ const Home: NextPage = function ({ enterprises }: any) {
 
   function handleNextEnterprises(): void {
     setPage(page + 1);
-    console.log(data);
   }
 
   return (
@@ -149,7 +149,8 @@ const Home: NextPage = function ({ enterprises }: any) {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const enterprises = await getEnterprises(1);
+  const data = await getEnterprises(1);
+  const enterprises = JSON.parse(JSON.stringify(data));
 
   return {
     props: {
