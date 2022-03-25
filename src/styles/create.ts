@@ -21,6 +21,10 @@ export const Content = styled.form`
     font-size: 1.125rem;
     margin-bottom: 2rem;
   }
+
+  @media (max-width: 430px) {
+    width: 90%;
+  }
 `;
 
 export const Address = styled.div`

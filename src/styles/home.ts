@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.main`
   max-width: 1140px;
   margin: 0 auto;
+  margin-bottom: 2rem;
 
   > button {
     margin: 0 auto;
@@ -65,5 +66,17 @@ export const ContainerTags = styled.div`
   align-items: center;
   div + div {
     margin-left: 1rem;
+  }
+
+  @media (max-width: 580px) {
+    flex-direction: column;
+    justify-content: center;
+    div + div {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  }
+  @media (max-width: 390px) {
+    display: none;
   }
 `;

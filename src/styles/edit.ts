@@ -66,6 +66,9 @@ export const Content = styled.form`
       }
     }
   }
+  @media (max-width: 430px) {
+    width: 90%;
+  }
 `;
 
 export const Address = styled.div`
