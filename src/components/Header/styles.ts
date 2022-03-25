@@ -21,11 +21,13 @@ export const Content = styled.div`
     cursor: pointer;
   }
   > a {
-    button {
-      width: 2rem;
-      font-size: 0.9rem;
-      svg {
-        display: none;
+    @media (max-width: 430px) {
+      button {
+        width: 2rem;
+        font-size: 0.9rem;
+        svg {
+          display: none;
+        }
       }
     }
   }

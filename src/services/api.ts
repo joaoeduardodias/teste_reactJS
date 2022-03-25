@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3001/enterprises',
+  baseURL: 'https://fake-server-app-2.herokuapp.com/enterprises',
 });
 export const apiZipCode = axios.create({
   baseURL: 'https://viacep.com.br/',
