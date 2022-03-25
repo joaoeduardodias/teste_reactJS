@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { Button } from '../../../components/Button';
-import { Header } from '../../../components/Header';
-import { Input, InputCep } from '../../../components/Input';
-import { Select } from '../../../components/Select';
-import { api, apiZipCode } from '../../../services/api';
-import { queryClient } from '../../../services/queryClient';
-import { Toast } from '../../_app';
-import { Address, Container, Content } from './styles';
+import { Button } from '../../components/Button';
+import { Header } from '../../components/Header';
+import { Input, InputCep } from '../../components/Input';
+import { Select } from '../../components/Select';
+import { api, apiZipCode } from '../../services/api';
+import { queryClient } from '../../services/queryClient';
+import { Address, Container, Content } from '../../styles/edit';
+import { Toast } from '../_app';
 
 enum releasesEnum {
   short_release = 'short_release',
@@ -136,7 +136,7 @@ const EditEnterprise: NextPage = function () {
   }
 
   const handleEditEnterprise: SubmitHandler<FormInputs> = async data => {
-    const enterprise = {
+    const enterprise: any = {
       name: data.name,
       status: data.releases.toUpperCase(),
       purpose: data.purpose.toUpperCase(),
@@ -159,7 +159,11 @@ const EditEnterprise: NextPage = function () {
       <Container>
         <Content onSubmit={handleSubmit(handleEditEnterprise)}>
           <h2>Informações</h2>
-          <Select {...register('releases')} error={errors.releases}>
+          <Select
+            {...register('releases')}
+            defaultValue="short_release"
+            error={errors.releases}
+          >
             <option value="short_release">Breve Lançamento</option>
             <option value="release">Lançamento</option>
             <option value="in_Works">Em obras</option>
@@ -170,10 +174,12 @@ const EditEnterprise: NextPage = function () {
             {...register('name', { required: true })}
             error={errors.name}
           />
-          <Select {...register('purpose')} error={errors.purpose}>
-            <option value="home" selected>
-              Residencial
-            </option>
+          <Select
+            {...register('purpose')}
+            defaultValue="home"
+            error={errors.purpose}
+          >
+            <option value="home">Residencial</option>
             <option value="commercial">Comercial</option>
           </Select>
           <InputCep

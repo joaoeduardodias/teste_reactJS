@@ -12,7 +12,7 @@ import { Tag } from '../components/Tag';
 import { api } from '../services/api';
 import { useEnterprises } from '../services/hooks/useEnterprise';
 import { queryClient } from '../services/queryClient';
-import { Container, ContainerTags, Content } from './styles';
+import { Container, ContainerTags, Content } from '../styles/home';
 import { Toast } from './_app';
 
 const Home: NextPage = function () {
@@ -44,7 +44,7 @@ const Home: NextPage = function () {
     );
   }
 
-  async function handleDeleteEnterprise(enterpriseId: string): Promise<void> {
+  async function handleDeleteEnterprise(enterpriseId: any): Promise<void> {
     Swal.fire({
       title: 'Apagar empreendimento ?',
       text: 'Deseja apagar esse empreendimento ?',
@@ -56,13 +56,18 @@ const Home: NextPage = function () {
       cancelButtonText: 'Cancelar',
     }).then(result => {
       if (result.isConfirmed) {
-        deleteEnterprise.mutateAsync(enterpriseId);
+        deleteEnterprise.mutateAsync(enterpriseId, {});
         Toast.fire({
           icon: 'success',
           title: 'Empreendimento editado com sucesso!',
         });
       }
     });
+  }
+
+  function handleNextEnterprises(): void {
+    setPage(page + 1);
+    console.log(data);
   }
 
   return (
@@ -129,7 +134,7 @@ const Home: NextPage = function () {
             </>
           )}
         </Content>
-        <Button name="Carregar mais" />
+        <Button name="Carregar mais" onPageNext={handleNextEnterprises} />
       </Container>
     </>
   );

@@ -6,15 +6,17 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   icon?: React.ComponentType<IconBaseProps>;
   name: string;
   children?: ReactNode;
+  onPageNext?: () => void;
 }
 
 export function Button({
   name,
   icon: Icon,
   children,
+  onPageNext,
 }: ButtonProps): JSX.Element {
   return (
-    <Container>
+    <Container onClick={onPageNext}>
       {name}
       {Icon && <Icon size={22} color="#FFF" />}
       {children}

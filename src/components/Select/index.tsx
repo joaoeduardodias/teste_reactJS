@@ -6,15 +6,22 @@ interface SelectProps {
   children: ReactNode;
   name: string;
   error?: FieldError;
+  defaultValue?: string;
 }
 
 const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
-  { children, name, error = null, ...rest },
+  { children, name, defaultValue, error = null, ...rest },
   ref
 ): JSX.Element => {
   return (
     <>
-      <Container name={name} id={name} ref={ref} {...rest}>
+      <Container
+        name={name}
+        id={name}
+        defaultValue={defaultValue}
+        ref={ref}
+        {...rest}
+      >
         {children}
       </Container>
       {!!error && <strong>{error.message}</strong>}

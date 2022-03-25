@@ -5,14 +5,14 @@ import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { Button } from '../../../components/Button';
-import { Header } from '../../../components/Header';
-import { Input, InputCep } from '../../../components/Input';
-import { Select } from '../../../components/Select';
-import { api, apiZipCode } from '../../../services/api';
-import { queryClient } from '../../../services/queryClient';
-import { Toast } from '../../_app';
-import { Address, Container, Content } from './styles';
+import { Button } from '../../components/Button';
+import { Header } from '../../components/Header';
+import { Input, InputCep } from '../../components/Input';
+import { Select } from '../../components/Select';
+import { api, apiZipCode } from '../../services/api';
+import { queryClient } from '../../services/queryClient';
+import { Address, Container, Content } from '../../styles/create';
+import { Toast } from '../_app';
 
 enum releasesEnum {
   short_release = 'short_release',
@@ -110,7 +110,7 @@ const CreateEnterprise: NextPage = function () {
   }
 
   const handleCreateEnterprise: SubmitHandler<FormInputs> = async data => {
-    const enterprise = {
+    const enterprise: any = {
       name: data.name,
       status: data.releases.toUpperCase(),
       purpose: data.purpose.toUpperCase(),
